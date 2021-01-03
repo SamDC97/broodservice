@@ -4,6 +4,7 @@ import be.cvo.broodservice.domain.BroodEntity;
 import be.cvo.broodservice.domain.repository.BroodRepository;
 import be.cvo.broodservice.service.dto.Brood;
 import be.cvo.broodservice.service.mapper.BroodMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +15,14 @@ import java.util.stream.StreamSupport;
 @Service
 public class BroodService {
 
+    @Autowired
     private BroodRepository broodRepository;
+    @Autowired
     private BroodMapper broodMapper;
 
-    public BroodService(BroodRepository broodRepository, BroodMapper broodMapper){
-        this.broodRepository = broodRepository;
-        this.broodMapper = broodMapper;
+    public void addBrood(Brood brood){
+        broodRepository.save(broodMapper.toEntity(brood));
     }
-
-    public void addBrood(Brood brood){broodRepository.save(broodMapper.toEntity(brood));}
 
     public List<Brood> getAll(){
         return StreamSupport

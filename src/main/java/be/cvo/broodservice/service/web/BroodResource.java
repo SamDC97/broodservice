@@ -22,7 +22,6 @@ public class BroodResource {
 
     @PostMapping("/add-brood")
     public void createBrood(@RequestBody Brood brood){
-        System.out.println(brood);
         broodService.addBrood(brood);
     }
 
